@@ -26,12 +26,12 @@ export default function Articles() {
   return (
     <>
       <h2> Here's a list of all available articles... </h2>
-      {articles.map((art) => {
+      {articles.map((article) => {
         return (
-          <Link to={`/articles/${art.article_id}`}>
+          <Link to={`/articles/${article.article_id}`} key={article.article_id}>
             <li>
               {" "}
-              <ul key={art.article_id}>{art.title}</ul>{" "}
+              <ul>{article.title}</ul>{" "}
             </li>
           </Link>
         );
