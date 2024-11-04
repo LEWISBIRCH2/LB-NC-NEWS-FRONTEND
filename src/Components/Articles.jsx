@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Articles() {
   const [articles, setArticles] = useState([]);
@@ -27,10 +28,12 @@ export default function Articles() {
       <h2> Here's a list of all available articles... </h2>
       {articles.map((art) => {
         return (
-          <li>
-            {" "}
-            <ul key={art.article_id}>{art.title}</ul>{" "}
-          </li>
+          <Link to={`/articles/${art.article_id}`}>
+            <li>
+              {" "}
+              <ul key={art.article_id}>{art.title}</ul>{" "}
+            </li>
+          </Link>
         );
       })}
     </>
