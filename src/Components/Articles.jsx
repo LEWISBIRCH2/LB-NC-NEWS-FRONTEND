@@ -10,8 +10,8 @@ export default function Articles() {
     setLoading(true);
     axios
       .get("https://lb-nc-news.onrender.com/api/articles")
-      .then((artList) => {
-        setArticles(artList.data.articles);
+      .then((articleList) => {
+        setArticles(articleList.data.articles);
         setLoading(false);
       })
       .catch((err) => {

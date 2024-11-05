@@ -45,7 +45,12 @@ export default function SingleArticleComments() {
   return (
     <>
       <h2> Here's all comments about Article {URL}</h2>
-      <p> {body} </p>
+      <p>
+        {" "}
+        {body}
+        <br></br>
+        -----------------------------------------------------------------{" "}
+      </p>
       {singleArticleComment.map((comment) => {
         return (
           <section key={comment.comment_id}>
