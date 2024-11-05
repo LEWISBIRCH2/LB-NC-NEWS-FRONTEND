@@ -11,6 +11,11 @@ export default function SingleArticleComments() {
   const [singleArticleComment, setSingleArticleComment] = useState([]);
   const [loading, setLoading] = useState(false);
   const [body, setBody] = useState("");
+  const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState("");
+  const [comment, setComment] = useState("");
+  const [dependancy, setDependancy] = useState(true);
+  const userNames = [];
 
   useEffect(() => {
     setLoading(true);
@@ -18,6 +23,19 @@ export default function SingleArticleComments() {
       .get(`https://lb-nc-news.onrender.com/api/articles/${URL}`)
       .then((article) => {
         setBody(article.data.article[0].body);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err, "UNSUCCESSFUL");
+      });
+  }, []);
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`https://lb-nc-news.onrender.com/api/users`)
+      .then((users) => {
+        setUsers(users.data.users);
         setLoading(false);
       })
       .catch((err) => {
@@ -36,21 +54,86 @@ export default function SingleArticleComments() {
       .catch((err) => {
         console.log(err, "UNSUCCESSFUL");
       });
-  }, []);
+  }, [dependancy]);
+
+  for (let i = 0; i < users.length; i++) {
+    userNames.push(users[i].username);
+  }
 
   if (loading) {
     return <p>Loading...</p>;
   }
 
+  function handleNewComment(event) {
+    event.preventDefault();
+    setComment(event.target.value);
+  }
+
+  function handleUserChange(event) {
+    setSelectedUser(event.target.value);
+  }
+
+  function sumbitComment(event) {
+    event.preventDefault();
+    let newComment = {
+      body: comment,
+      username: selectedUser,
+    };
+
+    axios
+      .post(
+        `https://lb-nc-news.onrender.com/api/articles/${URL}/comments`,
+        newComment
+      )
+      .then((response) => {
+        console.log(response.data, "Post SUCCESSFUL");
+        alert("Post Successful!");
+        setDependancy((current) => {
+          !current;
+        });
+      })
+      .catch((err) => {
+        alert(err, "UNSUCCESSFUL - Try again later");
+      });
+  }
   return (
     <>
-      <h2> Here's all comments about Article {URL}</h2>
-      <p>
-        {" "}
-        {body}
+      <section>
+        <h2> Here's all comments about Article {URL}</h2> {body}
         <br></br>
         -----------------------------------------------------------------{" "}
-      </p>
+      </section>
+      <section>
+        <br></br>
+        <form onSubmit={sumbitComment}>
+          <label>
+            Add your comment:
+            <input
+              type="text"
+              id="commentInput"
+              onInput={handleNewComment}
+              required
+            ></input>
+            <br></br>
+            <label> Select user:</label>
+            <select onChange={handleUserChange} required>
+              <option> </option>
+              {userNames.map((user) => {
+                return (
+                  <option key={user} value={user}>
+                    {" "}
+                    {user}
+                  </option>
+                );
+              })}
+            </select>
+            <button type="submit"> Add comment</button>
+          </label>
+        </form>
+        <br></br>
+        -----------------------------------------------------------------{" "}
+      </section>
+
       {singleArticleComment.map((comment) => {
         return (
           <section key={comment.comment_id}>
