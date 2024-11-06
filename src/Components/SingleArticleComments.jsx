@@ -88,8 +88,7 @@ export default function SingleArticleComments() {
         `https://lb-nc-news.onrender.com/api/articles/${URL}/comments`,
         newComment
       )
-      .then((response) => {
-        console.log(response.data, "Post SUCCESSFUL");
+      .then(() => {
         alert("Post Successful!");
         setDependancy((current) => {
           !current;

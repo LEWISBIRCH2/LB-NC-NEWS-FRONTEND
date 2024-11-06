@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { upvoteFunction, downvoteFunction } from "./Voting";
+import filterTopics from "./Topics";
 
 export default function SingleArticle() {
   const URL = useLocation().pathname.slice(10);
@@ -93,7 +94,7 @@ export default function SingleArticle() {
         {" "}
         Downvote!{" "}
       </button>
-      <h2> Image:</h2> {singleArticle.article_img_url}
+      <h2> Image:</h2> <img src={singleArticle.article_img_url}></img>
       <h2> Comment Count: </h2> {singleArticle.comment_count}
       <Link to={`/articles/${URL}/comments`}>
         <h2> Click here to see comments about this article! </h2>
