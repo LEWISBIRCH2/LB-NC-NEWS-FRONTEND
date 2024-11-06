@@ -42,7 +42,8 @@ export default function Articles() {
     if (event.target.value === "Descending") {
       setIsAscending("desc");
     }
-  }
+  } 
+  
 
   useEffect(() => {
     axios
