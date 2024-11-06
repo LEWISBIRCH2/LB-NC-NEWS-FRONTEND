@@ -15,6 +15,9 @@ export default function SingleArticleComments() {
   const [selectedUser, setSelectedUser] = useState("");
   const [comment, setComment] = useState("");
   const [dependancy, setDependancy] = useState(true);
+  const [filteredList, setFilteredList] = useState([]);
+  const [deleteUser, setDeleteUser] = useState("");
+  const [commentToDelete, setCommentToDelete] = useState([]);
   const userNames = [];
 
   useEffect(() => {
@@ -96,6 +99,35 @@ export default function SingleArticleComments() {
         alert(err, "UNSUCCESSFUL - Try again later");
       });
   }
+
+  function filterComments(event) {
+    const currentUser = event.target.value;
+    const updatedCommentList = singleArticleComment.filter((user) => {
+      return user.author === currentUser;
+    });
+    setFilteredList(updatedCommentList);
+    setDeleteUser(currentUser);
+  }
+
+  let placeholder = singleArticleComment;
+  if (filteredList.length !== 0) {
+    placeholder = filteredList;
+  }
+
+  function setDeleteComment(event) {
+    setCommentToDelete(event.target.value);
+  }
+
+  function deleteComment(event) {
+    event.preventDefault();
+    axios
+      .delete(`https://lb-nc-news.onrender.com/api/comments/${commentToDelete}`)
+      .then(() => {
+        alert("Delete Successful!");
+        setDependancy((current) => !current);
+        setFilteredList(singleArticleComment);
+      });
+  }
   return (
     <>
       <section>
@@ -104,6 +136,7 @@ export default function SingleArticleComments() {
         -----------------------------------------------------------------{" "}
       </section>
       <section>
+        <h2>Add a new comment</h2>
         <br></br>
         <form onSubmit={sumbitComment}>
           <label>
@@ -133,8 +166,56 @@ export default function SingleArticleComments() {
         <br></br>
         -----------------------------------------------------------------{" "}
       </section>
-
-      {singleArticleComment.map((comment) => {
+      <section>
+        <h2>Delete a comment</h2>
+        <label> Login as: </label>
+        <br></br>
+        <select onChange={filterComments} required>
+          <option> </option>
+          {userNames.map((user) => {
+            return (
+              <option key={user} value={user}>
+                {" "}
+                {user}
+              </option>
+            );
+          })}
+        </select>
+        <br></br>
+        <br></br>
+        <label>Select comment (by ID) to delete:</label>
+        <br></br>
+        <select onChange={setDeleteComment}>
+          {" "}
+          <option> </option>
+          {placeholder.map((comment) => {
+            if (deleteUser !== comment.author) {
+              return (
+                <option disabled={true} key={comment.comment_id}>
+                  {" "}
+                  No Comments Made...{" "}
+                </option>
+              );
+            }
+            return (
+              <option
+                key={comment.comment_id}
+                value={comment.comment_id}
+                required
+              >
+                {" "}
+                {comment.comment_id}
+              </option>
+            );
+          })}
+        </select>
+        <br></br>
+        <br></br>
+        <button onClick={deleteComment}> Delete comment </button>
+        <br></br>
+        -----------------------------------------------------------------{" "}
+      </section>
+      {placeholder.map((comment) => {
         return (
           <section key={comment.comment_id}>
             <h2> Comment ID:</h2> {comment.comment_id}
