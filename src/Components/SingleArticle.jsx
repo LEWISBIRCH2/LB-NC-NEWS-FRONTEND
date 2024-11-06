@@ -20,7 +20,7 @@ export default function SingleArticle() {
         setLoading(false);
       })
       .catch((err) => {
-        alert("Article not found - check for typing errors");;
+        alert("Article not found - check for typing errors");
       });
   }, []);
 
@@ -65,40 +65,46 @@ export default function SingleArticle() {
   }
 
   return (
-    <section>
-      <h2>Article ID:</h2> {singleArticle.article_id}
-      <h2> Title:</h2> {singleArticle.title}
-      <h2> Topic:</h2> {singleArticle.topic}
-      <h2> Author:</h2> {singleArticle.author}
-      <h2> Body:</h2> {singleArticle.body}
-      <h2> Created At:</h2> {singleArticle.created_at}
-      <h2> Votes:</h2>{" "}
-      {Number(singleArticle.votes) + (Number(votes) + Number(downVotes))}
-      <button
-        id="upvoteButton"
-        type="button"
-        onClick={triggerUpvoteFunctions}
-        article_id={singleArticle.article_id}
-        votes={singleArticle.votes}
-      >
-        {" "}
-        Upvote!{" "}
-      </button>
-      <button
-        id="downvoteButton"
-        type="button"
-        onClick={triggerDownvoteFunctions}
-        article_id={singleArticle.article_id}
-        votes={singleArticle.votes}
-      >
-        {" "}
-        Downvote!{" "}
-      </button>
-      <h2> Image:</h2> <img src={singleArticle.article_img_url}></img>
-      <h2> Comment Count: </h2> {singleArticle.comment_count}
-      <Link to={`/articles/${URL}/comments`}>
-        <h2> Click here to see comments about this article! </h2>
+    <>
+      <Link to={`/articles`}>
+        <button>Back to all articles</button>
       </Link>
-    </section>
+
+      <section>
+        <h2>Article ID:</h2> {singleArticle.article_id}
+        <h2> Title:</h2> {singleArticle.title}
+        <h2> Topic:</h2> {singleArticle.topic}
+        <h2> Author:</h2> {singleArticle.author}
+        <h2> Body:</h2> {singleArticle.body}
+        <h2> Created At:</h2> {singleArticle.created_at}
+        <h2> Votes:</h2>{" "}
+        {Number(singleArticle.votes) + (Number(votes) + Number(downVotes))}
+        <button
+          id="upvoteButton"
+          type="button"
+          onClick={triggerUpvoteFunctions}
+          article_id={singleArticle.article_id}
+          votes={singleArticle.votes}
+        >
+          {" "}
+          Upvote!{" "}
+        </button>
+        <button
+          id="downvoteButton"
+          type="button"
+          onClick={triggerDownvoteFunctions}
+          article_id={singleArticle.article_id}
+          votes={singleArticle.votes}
+        >
+          {" "}
+          Downvote!{" "}
+        </button>
+        <h2> Image:</h2> <img src={singleArticle.article_img_url}></img>
+        <h2> Comment Count: </h2> {singleArticle.comment_count}
+        <Link to={`/articles/${URL}/comments`}>
+          <h2> Click here to see comments about this article! </h2>
+        </Link>
+      </section>
+    </>
   );
 }

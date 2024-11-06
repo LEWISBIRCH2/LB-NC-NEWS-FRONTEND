@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 export default function SingleArticleComments() {
   let URL = useLocation().pathname.slice(10, 12);
   if (URL[1] === "/") {
@@ -131,6 +131,9 @@ export default function SingleArticleComments() {
   }
   return (
     <>
+      <Link to={`/articles`}>
+        <button>Back to all articles</button>
+      </Link>
       <section>
         <h2> Here's all comments about Article {URL}</h2> {body}
         <br></br>
