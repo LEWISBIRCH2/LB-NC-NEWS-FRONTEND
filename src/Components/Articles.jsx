@@ -13,7 +13,7 @@ export default function Articles() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://lb-nc-news.onrender.com/api/articles")
+      .get("https://lb-nc-news.onrender.com/api/articles?limit=50")
       .then((articleList) => {
         setArticles(articleList.data.articles);
         setLoading(false);
@@ -47,7 +47,7 @@ export default function Articles() {
   useEffect(() => {
     axios
       .get(
-        `https://lb-nc-news.onrender.com/api/articles?sort_by=${filterTarget}&order=${isAscending}`
+        `https://lb-nc-news.onrender.com/api/articles?sort_by=${filterTarget}&order=${isAscending}&limit=50`
       )
       .then((response) => {
         setArticles(response.data.articles);

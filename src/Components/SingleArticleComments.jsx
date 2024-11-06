@@ -29,7 +29,7 @@ export default function SingleArticleComments() {
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err, "UNSUCCESSFUL");
+        alert("Article not found");
       });
   }, []);
 
@@ -49,7 +49,9 @@ export default function SingleArticleComments() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://lb-nc-news.onrender.com/api/articles/${URL}/comments`)
+      .get(
+        `https://lb-nc-news.onrender.com/api/articles/${URL}/comments?limit=30`
+      )
       .then((comments) => {
         setSingleArticleComment(comments.data.comments);
         setLoading(false);
