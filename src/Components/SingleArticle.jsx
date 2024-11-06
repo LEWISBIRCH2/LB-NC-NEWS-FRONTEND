@@ -20,7 +20,7 @@ export default function SingleArticle() {
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err, "UNSUCCESSFUL");
+        alert("Article not found - check for typing errors");;
       });
   }, []);
 
