@@ -2,7 +2,6 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { upvoteFunction, downvoteFunction } from "./Voting";
-import filterTopics from "./Topics";
 
 export default function SingleArticle() {
   const URL = useLocation().pathname.slice(10);
