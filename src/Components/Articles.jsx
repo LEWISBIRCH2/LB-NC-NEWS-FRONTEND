@@ -68,9 +68,9 @@ export default function Articles() {
       <>
         <h2> Here's all the articles based on {TopicURL} </h2>
         <Link to={`/articles`}>
-          <button>Back to all articles</button>
+          <button className = 'backTopics'>Back to all articles</button>
         </Link>
-        <ul>
+        <section className="articles">
           {articles.map((article) => {
             if (article.topic === TopicURL)
               return (
@@ -78,51 +78,75 @@ export default function Articles() {
                   to={`/articles/${article.article_id}`}
                   key={article.article_id}
                 >
-                  <li> {article.title}</li>
+                  <ol>
+                    {" "}
+                    <ul>
+                      {article.title} <br></br>
+                      <br></br>
+                      Time:{" "}
+                      {new Date(article.created_at).toString().slice(15, 24)}
+                      <br></br>
+                      Date:{" "}
+                      {new Date(article.created_at).toString().slice(0, 15)}
+                      <br></br>
+                      Votes: {article.votes}
+                      <br></br>
+                    </ul>{" "}
+                  </ol>
                 </Link>
               );
           })}
-        </ul>
+        </section>
       </>
     );
   }
 
   return (
     <>
-      <section>
-        <h2>Browse by Topic:</h2>
-        {<FilterTopics />}
-      </section>
-      <section>
-        <h2> Sort by... </h2>
-        <select onChange={handleSort}>
-          <option>Title </option>
-          <option>Date </option>
-          <option>Votes </option>
-        </select>
-        <select onChange={handleOrder}>
-          <option>Ascending</option>
-          <option>Descending</option>
-        </select>
-      </section>
+      <div id="banner">
+        <section id="topic">
+          <h2>Browse by Topic:</h2>
+          {<FilterTopics />}
+        </section>
+        <section id="sort">
+          <h2> Sort by... </h2>
+          <select onChange={handleSort}>
+            <option>Title </option>
+            <option>Date </option>
+            <option>Votes </option>
+          </select>
+          <select onChange={handleOrder}>
+            <option>Ascending</option>
+            <option>Descending</option>
+          </select>
+        </section>
+      </div>
 
       <h2> Here's a list of all available articles... </h2>
-      {articles.map((article) => {
-        return (
-          <Link to={`/articles/${article.article_id}`} key={article.article_id}>
-            <ol>
-              {" "}
-              <ul>
-                {article.title} <br></br>
-                Date: {article.created_at}
-                <br></br>
-                Votes: {article.votes}
-                <br></br>
-              </ul>{" "}
-            </ol>
-          </Link>
-        );
-      })}
+      <section className="articles">
+        {articles.map((article) => {
+          return (
+            <Link
+              to={`/articles/${article.article_id}`}
+              key={article.article_id}
+            >
+              <ol>
+                {" "}
+                <ul>
+                  {article.title} <br></br>
+                  <br></br>
+                  Time: {new Date(article.created_at).toString().slice(15, 24)}
+                  <br></br>
+                  Date: {new Date(article.created_at).toString().slice(0, 15)}
+                  <br></br>
+                  Votes: {article.votes}
+                  <br></br>
+                </ul>{" "}
+              </ol>
+            </Link>
+          );
+        })}
+      </section>
     </>
   );
 }

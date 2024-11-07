@@ -1,0 +1,111 @@
+h1,
+h2 {
+  text-align: center;
+}
+
+h1 {
+  text-transform: uppercase;
+  word-spacing: 6px;
+}
+
+#banner {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20px;
+  align-items: center;
+  border: 0.3rem black solid;
+  border-radius: 20px;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+}
+
+button {
+  height: 50px;
+  border-radius: 1rem;
+  font-weight: 700;
+  color: dimgrey;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  transition: all 400ms;
+  margin-right: 10px;
+
+  &:hover {
+    scale: 1.1;
+  }
+}
+
+select {
+  margin-right: 10px;
+  height: 50px;
+  font-weight: 700;
+  color: dimgrey;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  text-align: center;
+  border-radius: 1rem;
+  border: 2px solid black;
+}
+
+.articles {
+  display: inline-grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.articles a {
+  display: flex;
+  border: black 2px solid;
+  border-radius: 8px;
+  text-decoration: none;
+  text-align: center;
+  align-items: center;
+  margin: 0.4rem;
+  padding: 0.2rem;
+  transition: all 400ms;
+  justify-content: center;
+
+  &:hover {
+    scale: 1.1;
+    background-color: rgb(244, 244, 244);
+  }
+}
+
+ol,
+ul {
+  padding-left: 0px;
+}
+
+.backTopics {
+  margin-left: 10px;
+  transform: translateY(-100px);
+}
+
+.backSingle {
+  margin-left: 10px;
+  transform: translateY(-50px);
+}
+
+#fullGrid {
+  display: inline-grid;
+  grid-template-columns: 2fr;
+  grid-template-rows: 100px auto 15px auto auto;
+}
+
+#boxOne {
+  border: black solid 2px;
+  grid-column: 2;
+  display: flex;
+  grid-template-columns: 2fr;
+  grid-template-rows: 100px auto 15px auto auto;
+}
+
+.gridBody {
+  grid-column: 1 / span 2;
+  border: rgb(0, 4, 255) solid 2px;
+}
+
+.gridTitle {
+  border: rgb(255, 0, 0) solid 2px;
+}
