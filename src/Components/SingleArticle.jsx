@@ -71,20 +71,23 @@ export default function SingleArticle() {
 
       <section id="fullGrid">
         <p className="gridTitle">{singleArticle.title}</p>
+
         <div id="boxOne">
-          <h2 className="gridOne">Article ID:</h2>{" "}
-          <p className="gridOne">{singleArticle.article_id}</p>
-          <h2 className="gridOne"> Topic:</h2>{" "}
-          <p className="gridOne">{singleArticle.topic}</p>
-          <h2 className="gridOne"> Author:</h2>{" "}
-          <p className="gridOne">{singleArticle.author}</p>
-          <h2 className="gridOne"> Created At:</h2>{" "}
-          <p className="gridOne">{singleArticle.created_at}</p>
-          <h2 className="gridOne"> Votes:</h2>{" "}
-          <p className="gridOne">
-            {" "}
+        
+            <h2 className="gridOne">Article ID:</h2> {singleArticle.article_id}
+     
+            <h2 className="gridOne"> Topic:</h2> {singleArticle.topic}
+   
+            <h2 className="gridOne"> Author:</h2> {singleArticle.author}
+
+            <h2 className="gridOne"> Created On:</h2>{" "}
+            {new Date(singleArticle.created_at).toString().slice(0, 24)}
+  
+            <h2 className="gridOne"> Votes:</h2>{" "}
             {Number(singleArticle.votes) + (Number(votes) + Number(downVotes))}
-          </p>
+       <br></br>
+       <br></br>
+
           <button
             id="upvoteButton"
             type="button"
@@ -107,10 +110,12 @@ export default function SingleArticle() {
           </button>
         </div>
         <p className="gridBody">{singleArticle.body}</p>
-        <h2> Image:</h2> <img src={singleArticle.article_img_url}></img>
-        <h2> Comment Count: </h2> {singleArticle.comment_count}
+        <img id="img" src={singleArticle.article_img_url}></img>
         <Link to={`/articles/${URL}/comments`}>
-          <h2> Click here to see comments about this article! </h2>
+          <p id='comments'>
+            {" "}
+            Click here to see comments about this article!{" "}
+          </p>
         </Link>
       </section>
     </>
