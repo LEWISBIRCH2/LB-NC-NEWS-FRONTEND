@@ -132,14 +132,13 @@ export default function SingleArticleComments() {
   return (
     <>
       <Link to={`/articles`}>
-        <button>Back to all articles</button>
+        <button id="backComments">Back to all articles</button>
       </Link>
-      <section>
+      <section className="float">
         <h2> Here's all comments about Article {URL}</h2> {body}
         <br></br>
-        -----------------------------------------------------------------{" "}
       </section>
-      <section>
+      <section className="addComment">
         <h2>Add a new comment</h2>
         <br></br>
         <form onSubmit={sumbitComment}>
@@ -168,9 +167,8 @@ export default function SingleArticleComments() {
           </label>
         </form>
         <br></br>
-        -----------------------------------------------------------------{" "}
       </section>
-      <section>
+      <section className="deleteComment">
         <h2>Delete a comment</h2>
         <label> Login as: </label>
         <br></br>
@@ -217,21 +215,21 @@ export default function SingleArticleComments() {
         <br></br>
         <button onClick={deleteComment}> Delete comment </button>
         <br></br>
-        -----------------------------------------------------------------{" "}
       </section>
-      {placeholder.map((comment) => {
-        return (
-          <section key={comment.comment_id}>
-            <h2> Comment ID:</h2> {comment.comment_id}
-            <h2> Author:</h2> {comment.author}
-            <h2> Body:</h2> {comment.body}
-            <h2> Created At:</h2> {comment.created_at}
-            <h2> Votes:</h2> {comment.votes}
-            <br></br>
-            -----------------------------------------------------------------
-          </section>
-        );
-      })}
+      <div className="allComments">
+        {placeholder.map((comment) => {
+          return (
+            <section key={comment.comment_id} className="commentsA">
+              <h2> Comment ID:</h2> {comment.comment_id}
+              <h2> Author:</h2> {comment.author}
+              <h2> Comment:</h2> {comment.body}
+              <h2> Created On:</h2>{" "}
+              {new Date(comment.created_at).toString().slice(0, 24)}
+              <h2> Votes:</h2> {comment.votes}
+            </section>
+          );
+        })}
+      </div>
     </>
   );
 }
