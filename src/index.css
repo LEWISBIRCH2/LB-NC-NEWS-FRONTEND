@@ -7,7 +7,7 @@ h1 {
   text-transform: uppercase;
   word-spacing: 6px;
   font-size: 4em;
-  color: blueviolet;
+  color: black;
 }
 
 #banner {
@@ -15,7 +15,7 @@ h1 {
   justify-content: space-evenly;
   gap: 20px;
   align-items: center;
-  border: 0.3rem blueviolet solid;
+  border: 0.3rem black solid;
   border-radius: 20px;
   padding-bottom: 1rem;
   padding-left: 1rem;
@@ -157,14 +157,14 @@ ul {
 }
 
 .float {
-    position: sticky;
-    top: 0;
-    background-color: white;
-    border-bottom: 2px solid black;
-    width: 100%;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-  }
+  position: sticky;
+  top: 0;
+  background-color: white;
+  border-bottom: 2px solid black;
+  width: 100%;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
 
 .addComment {
   border: #000000 2px solid;
@@ -205,8 +205,6 @@ ul {
   margin: 0.4rem;
   padding: 0.2rem;
 }
-
-
 
 #backComments {
   margin-left: 10px;
